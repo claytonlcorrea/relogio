@@ -1,0 +1,194 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relógio</title>
+    <style>
+    .card {
+        /* Adicione aqui os estilos do seu card */
+        background: linear-gradient(to top, #878787, #262626);
+        border-radius: 15px;
+        width: 480px;
+        height: 480px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .resizable {
+        resize: both;
+        overflow: auto;
+        min-width: 200px;
+        min-height: 200px;
+    }
+
+    
+    .relogio {
+        width: 450px;
+        height: 450px;
+        position: relative;
+        background-image: url("{% static 'img/21h.png' %}"); /* imagem */        
+        background-size: cover;
+        background-position: center;
+    }
+    .numero {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    h2 {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .ponteiro-horas,
+    .ponteiro-minutos,
+    .ponteiro-segundos {
+        position: absolute;
+        background-color: #faf7f7;
+        transform-origin: 50% 100%; 
+        top: 50%;
+        left: 50%;
+    }
+    .ponteiro-horas {
+        width: 6px;
+        height: 190px;
+        margin-top: -190px; /* Ajuste para posicionar o ponteiro corretamente */
+        transform: rotate(90deg); /* Ajuste de orientação */
+        /*background-image: url("{% static 'img/Ponteiro.png' %}");
+        background-size: cover;
+        background-position: center; 
+    }
+    {% comment %} .ponteiro-minutos {
+        width: 3px;
+        height: 80px;
+        margin-top: -80px; /* Ajuste para posicionar o ponteiro corretamente */
+    }
+    .ponteiro-segundos {
+        width: 2px;
+        height: 100px;
+        margin-top: -100px; /* Ajuste para posicionar o ponteiro corretamente */
+    } {% endcomment %}
+    h2 {
+        font-family: Arial, sans-serif;
+    }
+    </style>
+</head>
+<body>
+    <div id="Market24h" class="card resizable">
+        <!-- Conteúdo do card -->
+        <div class="card-handle cursor-move flex items-center justify-center resize">
+            <div></div>
+            <div class="card-handle cursor-move col-span-2 flex items-center justify-center">
+                <span class="inline-block text-base font-bold mx-2"></span>
+            </div>
+        </div>
+
+        <!-- Adicione o estilo diretamente no elemento div.relogio -->
+        <div class="relogio" style="
+            {% if "01:01" <= hora_atual <= "02:00" %}
+                background-image: url('{% static "img/01h.png" %}');
+                
+            {% elif "02:01" <= hora_atual <= "03:00" %}
+                background-image: url('{% static "img/02h.png" %}');
+                
+            {% elif "03:01" <= hora_atual <= "04:00" %}
+                background-image: url('{% static "img/03h.png" %}');
+               
+            {% elif "04:01" <= hora_atual <= "05:00" %}
+                background-image: url('{% static "img/04h.png" %}');
+                
+            {% elif "05:01" <= hora_atual <= "06:00" %}
+                background-image: url('{% static "img/05h.png" %}');
+            {% elif "06:01" <= hora_atual <= "07:00" %}
+                background-image: url('{% static "img/06h.png" %}');
+                
+            {% elif "07:01" <= hora_atual <= "08:00" %}
+                background-image: url('{% static "img/07h.png" %}');
+                
+            {% elif "08:01" <= hora_atual <= "09:00" %}
+                background-image: url('{% static "img/08h.png" %}');
+                
+            {% elif "09:01" <= hora_atual <= "10:00" %}
+                background-image: url('{% static "img/09h.png" %}');
+                
+            {% elif "10:01" <= hora_atual <= "11:30" %}
+                background-image: url('{% static "img/10h.png" %}');
+                
+            {% elif "11:31" <= hora_atual <= "12:30" %}
+                background-image: url('{% static "img/11_30h.png" %}');
+                
+            {% elif "12:31" <= hora_atual <= "13:00" %}
+                background-image: url('{% static "img/13h.png" %}');
+                
+            {% elif "13:01" <= hora_atual <= "17:00" %}
+                background-image: url('{% static "img/14h.png" %}');
+                
+            {% elif "17:01" <= hora_atual <= "18:00" %}
+                background-image: url('{% static "img/17h.png" %}');
+                
+            {% elif "18:01" <= hora_atual <= "20:00" %}
+                background-image: url('{% static "img/18h.png" %}');
+                
+            {% elif "20:01" <= hora_atual <= "21:00" %}
+                background-image: url('{% static "img/20hh.png" %}');
+                
+            {% elif "21:01" <= hora_atual <= "22:00" %}
+                background-image: url('{% static "img/23h.png" %}');
+                
+            {% elif "22:01" <= hora_atual <= "01:00" %}
+                background-image: url('{% static "img/23h.png" %}');
+                
+            {% endif %}
+            background-size: cover;
+            background-position: center;
+        ">
+            <!-- Ponteiros do relógio -->
+            <div class="ponteiro-horas" id="ponteiroHoras"></div>
+            <div class="ponteiro-minutos" id="ponteiroMinutos"></div>
+            <div class="ponteiro-segundos" id="ponteiroSegundos"></div>
+
+            <!-- Números ao redor do relógio -->
+            <!-- ... -->
+            <h2>{{ timezone.now }}</h2>
+        </div>
+    </div>
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+    function atualizarRelogio() {
+        const agora = new Date();
+    
+        const horas = agora.getHours();
+        const minutos = agora.getMinutes();
+        const segundos = agora.getSeconds();
+    
+        const grausHoras = (horas % 24) * 15 + (minutos / 60) * 15; // 15 graus por hora, 0.25 graus por minuto
+        const grausMinutos = minutos * 6 + (segundos / 60) * 6; // 6 graus por minuto, 0.1 grau por segundo
+        const grausSegundos = segundos * 6; // 6 graus por segundo
+    
+        document.getElementById('ponteiroHoras').style.transform = `rotate(${grausHoras}deg)`;
+        document.getElementById('ponteiroMinutos').style.transform = `rotate(${grausMinutos}deg)`;
+        document.getElementById('ponteiroSegundos').style.transform = `rotate(${grausSegundos}deg)`;
+    
+        setTimeout(atualizarRelogio, 1000);
+    }
+    
+    // Chame a função para iniciar o relógio
+     atualizarRelogio();      
+     window.onload = atualizarRelogio;
+    </script>
+
+</html>

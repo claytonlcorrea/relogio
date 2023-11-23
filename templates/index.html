@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relogio Index</title>
+    {% comment %} <script src="{% static 'js/relogio.js' %}"></script> {% endcomment %}
+    <script src="setup/static/js/relogio.js"></script>
+    <style>
+        .card {
+            /* Adicione aqui os estilos do seu card */
+            /* Exemplo: */
+            background: linear-gradient(to top, #878787, #262626);
+            border-radius: 15px;
+            width: 460px;
+            height: 460px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+    
+        .resizable {
+            resize: both;
+            overflow: auto;
+            min-width: 200px;
+            min-height: 200px;
+        }
+    
+        .relogio {
+            width: 450px;
+            height: 450px;
+            border: 2px solid #faf7f7;
+            border-radius: 50%;
+            position: relative;
+            background-image: url("{% static 'relogio.png' %}"); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
+        }
+        .numero {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2 {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .ponteiro-horas,
+        .ponteiro-minutos,
+        .ponteiro-segundos {
+            position: absolute;
+            background-color: #faf7f7;
+            transform-origin: 50% 100%; /* Fixando a extremidade inferior do ponteiro */
+            top: 50%;
+            left: 50%;
+        }
+        .ponteiro-horas {
+            width: 8px;
+            height: 200px;
+            margin-top: -200px; /* Ajuste para posicionar o ponteiro corretamente */
+            transform: rotate(90deg); /* Ajuste de orientação */
+        }
+        {% comment %} .ponteiro-minutos {
+            width: 3px;
+            height: 80px;
+            margin-top: -80px; /* Ajuste para posicionar o ponteiro corretamente */
+        }
+        .ponteiro-segundos {
+            width: 2px;
+            height: 100px;
+            margin-top: -100px; /* Ajuste para posicionar o ponteiro corretamente */
+        } {% endcomment %}
+        h2 {
+            font-family: Arial, sans-serif;
+        }
+        </style>
+</head>
+<body>
+    
+    <div id="Market24h" class="card resizable">
+        <!-- Conteúdo do card -->
+        <div class="card-handle cursor-move flex items-center justify-center resize">
+            <div></div>
+            <div class="card-handle cursor-move col-span-2 flex items-center justify-center">
+                <span class="inline-block text-base font-bold mx-2"></span>
+            </div>
+        </div>
+
+        <!-- Relógio -->
+        <div class="relogio">
+            <!-- Ponteiros do relógio -->
+            <div class="ponteiro-horas" id="ponteiroHoras"></div>
+            <div class="ponteiro-minutos" id="ponteiroMinutos"></div>
+            <div class="ponteiro-segundos" id="ponteiroSegundos"></div>
+
+            <!-- Números ao redor do relógio -->
+            <!-- ... -->
+            <h2>{{ timezone.now }}</h2>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+</html>
