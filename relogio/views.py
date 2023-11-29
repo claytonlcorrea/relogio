@@ -4,31 +4,30 @@ from datetime import datetime
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
-
 def relogio(request):
     agora = datetime.now()
     hora_atual = agora.strftime("%H:%M")
 
     imagens_de_fundo = {
-        "01:01-02:00": "img/01h.png",
-        "02:01-03:00": "img/02h.png",
-        "03:01-04:00": "img/03h.png",
-        "04:01-05:00": "img/04h.png",
-        "05:01-06:00": "img/05h.png",
-        "06:01-07:00": "img/06h.png",
-        "07:01-08:00": "img/07h.png",
-        "08:01-09:00": "img/08h.png",
-        "09:01-10:00": "img/09h.png",
-        "10:01-11:30": "img/10h.png",
-        "11:31-12:30": "img/11_30h.png",
-        "12:31-17:00": "img/14h.png",
-        "17:01-18:00": "img/17h.png",
-        "18:01-20:00": "img/01h.png",
-        "20:01-21:00": "img/20hh.png",
-        "21:01-22:00": "img/21h.png",
-        "22:01-01:00": "img/23h.png"
+        "01:00-01:59": "img/01h.png",
+        "02:00-02:59": "img/02h.png",
+        "03:00-03:59": "img/03h.png",
+        "04:00-04:59": "img/04h.png",
+        "05:00-05:59": "img/05h.png",
+        "06:00-06:59": "img/06h.png",
+        "07:00-07:59": "img/07h.png",
+        "08:00-09:30": "img/08h.png",
+        "09:31-09:59": "img/09h.png",
+        "10:00-11:29": "img/10h.png",
+        "11:30-11:59": "img/11h.png",
+        "12:00-12:59": "img/12h.png",
+        "13:00-13:30": "img/13h.png",
+        "13:31-16:59": "img/14h.png",
+        "17:00-17:59": "img/17h.png",
+        "18:00-19:59": "img/18h.png",
+        "20:00-20:59": "img/20h.png",
+        "21:00-21:59": "img/21h.png",
+        "22:00-00:59": "img/23h.png"
         # Adicione mais intervalos de tempo e imagens conforme necessário
     }
 
@@ -40,3 +39,9 @@ def relogio(request):
             imagem_fundo = imagem
             break
     return render(request, 'relogio.html', {'hora_atual': hora_atual, 'imagem_fundo': imagem_fundo})
+
+def index(request):
+    agora = datetime.now()
+    hora_atual = agora.strftime("%H:%M")
+    return render(request, 'index.html', {'hora_atual': hora_atual})
+

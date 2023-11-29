@@ -1,6 +1,9 @@
 {% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Relógio</title>
@@ -19,19 +22,18 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .resizable {
+    {% comment %} .resizable {
         resize: both;
         overflow: auto;
         min-width: 200px;
         min-height: 200px;
-    }
-
+    } {% endcomment %}
     
     .relogio {
         width: 450px;
         height: 450px;
         position: relative;
-        /*background-image: url("{% static 'img/21h.png' %}"); /* imagem */        
+        background-image: url("{% static 'img/12h.png' %}"); /* imagem */        
         background-size: cover;
         background-position: center;
     }
@@ -131,11 +133,17 @@
         document.getElementById('ponteiroSegundos').style.transform = `rotate(${grausSegundos}deg)`;
     
         setTimeout(atualizarRelogio, 1000);
+        
+
+        $('#relogio').css('background-image', `url('img/${hora}.png')`);
     }
     
+    setInterval(atualizarRelogio, 60000); //atualiza a cada minuto 
+    
     // Chame a função para iniciar o relógio
-     atualizarRelogio();      
-     window.onload = atualizarRelogio;
+    atualizarRelogio();      
+    window.onload = atualizarRelogio;
     </script>
 
 </html>
+{% endblock %}

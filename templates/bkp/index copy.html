@@ -1,9 +1,10 @@
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Relógio</title>
+    <title>INDEX</title>
     <style>
     .card {
         /* Adicione aqui os estilos do seu card */
@@ -19,19 +20,18 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .resizable {
+    {% comment %} .resizable {
         resize: both;
         overflow: auto;
         min-width: 200px;
         min-height: 200px;
-    }
-
+    } {% endcomment %}
     
     .relogio {
         width: 450px;
         height: 450px;
         position: relative;
-        background-image: url("{% static 'img/21h.png' %}"); /* imagem */        
+        /* background-image: url("{% static 'img/12h.png' %}"); /* imagem */        
         background-size: cover;
         background-position: center;
     }
@@ -62,29 +62,28 @@
     .ponteiro-horas {
         width: 6px;
         height: 190px;
-        margin-top: -190px; /* Ajuste para posicionar o ponteiro corretamente */
-        transform: rotate(90deg); /* Ajuste de orientação */
-        /*background-image: url("{% static 'img/Ponteiro.png' %}");
-        background-size: cover;
-        background-position: center; 
+        margin-top: -190px; 
+        transform: rotate(90deg); 
+        
     }
     {% comment %} .ponteiro-minutos {
         width: 3px;
         height: 80px;
-        margin-top: -80px; /* Ajuste para posicionar o ponteiro corretamente */
+        margin-top: -80px; 
     }
     .ponteiro-segundos {
         width: 2px;
         height: 100px;
-        margin-top: -100px; /* Ajuste para posicionar o ponteiro corretamente */
+        margin-top: -100px; 
     } {% endcomment %}
     h2 {
         font-family: Arial, sans-serif;
     }
     </style>
+    <h1>INDEX {{ hora_atual }}</h1>
 </head>
 <body>
-    <div id="Market24h" class="card resizable">
+    <div id="teste" class="card resizable">
         <!-- Conteúdo do card -->
         <div class="card-handle cursor-move flex items-center justify-center resize">
             <div></div>
@@ -92,63 +91,48 @@
                 <span class="inline-block text-base font-bold mx-2"></span>
             </div>
         </div>
-
+        
         <!-- Adicione o estilo diretamente no elemento div.relogio -->
         <div class="relogio" style="
-            {% if "01:01" <= hora_atual <= "02:00" %}
-                background-image: url('{% static "img/01h.png" %}');
-                
-            {% elif "02:01" <= hora_atual <= "03:00" %}
-                background-image: url('{% static "img/02h.png" %}');
-                
-            {% elif "03:01" <= hora_atual <= "04:00" %}
-                background-image: url('{% static "img/03h.png" %}');
-               
-            {% elif "04:01" <= hora_atual <= "05:00" %}
-                background-image: url('{% static "img/04h.png" %}');
-                
-            {% elif "05:01" <= hora_atual <= "06:00" %}
-                background-image: url('{% static "img/05h.png" %}');
-            {% elif "06:01" <= hora_atual <= "07:00" %}
-                background-image: url('{% static "img/06h.png" %}');
-                
-            {% elif "07:01" <= hora_atual <= "08:00" %}
-                background-image: url('{% static "img/07h.png" %}');
-                
-            {% elif "08:01" <= hora_atual <= "09:00" %}
-                background-image: url('{% static "img/08h.png" %}');
-                
-            {% elif "09:01" <= hora_atual <= "10:00" %}
-                background-image: url('{% static "img/09h.png" %}');
-                
-            {% elif "10:01" <= hora_atual <= "11:30" %}
-                background-image: url('{% static "img/10h.png" %}');
-                
-            {% elif "11:31" <= hora_atual <= "12:30" %}
-                background-image: url('{% static "img/11_30h.png" %}');
-                
-            {% elif "12:31" <= hora_atual <= "13:00" %}
-                background-image: url('{% static "img/13h.png" %}');
-                
-            {% elif "13:01" <= hora_atual <= "17:00" %}
-                background-image: url('{% static "img/14h.png" %}');
-                
-            {% elif "17:01" <= hora_atual <= "18:00" %}
-                background-image: url('{% static "img/17h.png" %}');
-                
-            {% elif "18:01" <= hora_atual <= "20:00" %}
-                background-image: url('{% static "img/18h.png" %}');
-                
-            {% elif "20:01" <= hora_atual <= "21:00" %}
-                background-image: url('{% static "img/20hh.png" %}');
-                
-            {% elif "21:01" <= hora_atual <= "22:00" %}
-                background-image: url('{% static "img/23h.png" %}');
-                
-            {% elif "22:01" <= hora_atual <= "01:00" %}
-                background-image: url('{% static "img/23h.png" %}');
-                
-            {% endif %}
+            {% if "01:00" <= hora_atual and hora_atual <= "01:59" %}
+                background-image: url('{% static 'img/01h.png' %}');      
+            {% elif "02:00" <= hora_atual and hora_atual <= "02:59" %}
+                background-image: url('{% static 'img/02h.png' %}');
+            {% elif "03:00" <= hora_atual and hora_atual <= "03:59" %}
+                background-image: url('{% static 'img/03h.png' %}');
+            {% elif "04:00" <= hora_atual and hora_atual <= "04:59" %}
+                background-image: url('{% static 'img/04h.png' %}');
+            {% elif "05:00" <= hora_atual and hora_atual <= "05:59" %}
+                background-image: url('{% static 'img/05h.png' %}');
+            {% elif "06:00" <= hora_atual and hora_atual <= "06:59" %}
+                background-image: url('{% static 'img/06h.png' %}');
+            {% elif "07:00" <= hora_atual and hora_atual <= "07:59" %}
+                background-image: url('{% static 'img/07h.png' %}');
+            {% elif "08:00" <= hora_atual and hora_atual <= "09:30" %}
+                background-image: url('{% static 'img/08h.png' %}');
+            {% elif "09:31" <= hora_atual and hora_atual <= "09:59" %}
+                background-image: url('{% static 'img/09h.png' %}');
+            {% elif "10:00" <= hora_atual and hora_atual <= "11:29" %}
+                background-image: url('{% static 'img/10h.png' %}');
+            {% elif "11:30" <= hora_atual and hora_atual <= "11:59" %}
+                background-image: url('{% static 'img/11h.png' %}');
+            {% elif "12:00" <= hora_atual and hora_atual <= "12:59" %}
+                background-image: url('{% static 'img/12h.png' %}');
+            {% elif "13:00" <= hora_atual and hora_atual <= "13:29" %}
+                background-image: url('{% static 'img/13h.png' %}');
+            {% elif "13:30" <= hora_atual and hora_atual <= "16:59" %}
+                background-image: url('{% static 'img/14h.png' %}');
+            {% elif "17:00" <= hora_atual and hora_atual <= "17:59" %}
+                background-image: url('{% static 'img/17h.png' %}');
+            {% elif "18:00" <= hora_atual and hora_atual <= "19:59" %}
+                background-image: url('{% static 'img/18h.png' %}');
+            {% elif "20:00" <= hora_atual and hora_atual <= "20:59" %}
+                background-image: url('{% static 'img/20h.png' %}');
+            {% elif "21:00" <= hora_atual and hora_atual <= "21:59" %}
+                background-image: url('{% static 'img/21h.png' %}');
+            {% elif "22:00" <= hora_atual and hora_atual <= "00:59" %}
+                background-image: url('{% static 'img/23h.png' %}');
+            {% endif %}          
             background-size: cover;
             background-position: center;
         ">
@@ -156,10 +140,11 @@
             <div class="ponteiro-horas" id="ponteiroHoras"></div>
             <div class="ponteiro-minutos" id="ponteiroMinutos"></div>
             <div class="ponteiro-segundos" id="ponteiroSegundos"></div>
-
+    
             <!-- Números ao redor do relógio -->
             <!-- ... -->
             <h2>{{ timezone.now }}</h2>
+            
         </div>
     </div>
 <body>
@@ -184,11 +169,15 @@
         document.getElementById('ponteiroSegundos').style.transform = `rotate(${grausSegundos}deg)`;
     
         setTimeout(atualizarRelogio, 1000);
+        
+
     }
     
+    setInterval(atualizarRelogio, 60000); //atualiza a cada minuto 
+    
     // Chame a função para iniciar o relógio
-     atualizarRelogio();      
-     window.onload = atualizarRelogio;
+    atualizarRelogio();      
+    window.onload = atualizarRelogio;
     </script>
 
 </html>

@@ -1,17 +1,19 @@
 {% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Relógio</title>
     <style>
     .card {
         /* Adicione aqui os estilos do seu card */
-        /* Exemplo: */
         background: linear-gradient(to top, #878787, #262626);
         border-radius: 15px;
-        width: 460px;
-        height: 460px;
+        width: 480px;
+        height: 480px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -20,20 +22,18 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .resizable {
+    {% comment %} .resizable {
         resize: both;
         overflow: auto;
         min-width: 200px;
         min-height: 200px;
-    }
-
+    } {% endcomment %}
+    
     .relogio {
         width: 450px;
         height: 450px;
-        border: 2px solid #faf7f7;
-        border-radius: 50%;
         position: relative;
-        background-image: url("{% static 'relogio.png' %}"); /* Substitua pelo caminho da sua imagem */
+        background-image: url("{% static 'img/12h.png' %}"); /* imagem */        
         background-size: cover;
         background-position: center;
     }
@@ -57,15 +57,18 @@
     .ponteiro-segundos {
         position: absolute;
         background-color: #faf7f7;
-        transform-origin: 50% 100%; /* Fixando a extremidade inferior do ponteiro */
+        transform-origin: 50% 100%; 
         top: 50%;
         left: 50%;
     }
     .ponteiro-horas {
-        width: 8px;
-        height: 200px;
-        margin-top: -200px; /* Ajuste para posicionar o ponteiro corretamente */
+        width: 6px;
+        height: 190px;
+        margin-top: -190px; /* Ajuste para posicionar o ponteiro corretamente */
         transform: rotate(90deg); /* Ajuste de orientação */
+        /*background-image: url("{% static 'img/Ponteiro.png' %}");
+        background-size: cover;
+        background-position: center; 
     }
     {% comment %} .ponteiro-minutos {
         width: 3px;
@@ -83,7 +86,6 @@
     </style>
 </head>
 <body>
-    
     <div id="Market24h" class="card resizable">
         <!-- Conteúdo do card -->
         <div class="card-handle cursor-move flex items-center justify-center resize">
@@ -92,19 +94,24 @@
                 <span class="inline-block text-base font-bold mx-2"></span>
             </div>
         </div>
-
-        <!-- Relógio -->
-        <div class="relogio">
+    
+        <!-- Adicione o estilo diretamente no elemento div.relogio -->
+        <div class="relogio" style="
+            background-image: url('{% static imagem_fundo %}');
+            background-size: cover;
+            background-position: center;
+        ">
             <!-- Ponteiros do relógio -->
             <div class="ponteiro-horas" id="ponteiroHoras"></div>
             <div class="ponteiro-minutos" id="ponteiroMinutos"></div>
             <div class="ponteiro-segundos" id="ponteiroSegundos"></div>
-
+    
             <!-- Números ao redor do relógio -->
             <!-- ... -->
             <h2>{{ timezone.now }}</h2>
         </div>
     </div>
+<body>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -126,11 +133,17 @@
         document.getElementById('ponteiroSegundos').style.transform = `rotate(${grausSegundos}deg)`;
     
         setTimeout(atualizarRelogio, 1000);
+        
+
+        $('#relogio').css('background-image', `url('img/${hora}.png')`);
     }
     
+    setInterval(atualizarRelogio, 60000); //atualiza a cada minuto 
+    
     // Chame a função para iniciar o relógio
-     atualizarRelogio();      
-     window.onload = atualizarRelogio;
+    atualizarRelogio();      
+    window.onload = atualizarRelogio;
     </script>
-</body>
+
 </html>
+{% endblock %}
