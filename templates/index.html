@@ -65,7 +65,6 @@
             font-family: Arial, sans-serif;
         }
     </style>
-    <h1>INDEX {{ hora_atual }}</h1>
 </head>
 
 <body>
@@ -78,49 +77,6 @@
         </div>
 
         <div class="relogio">
-            <script>
-                var novaImagem;
-                {% if "01:00" <= hora_atual and hora_atual <= "01:59" %}
-                    novaImagem = '{% static "img/01h.png" %}';
-                {% elif "02:00" <= hora_atual and hora_atual <= "02:59" %}
-                    novaImagem = '{% static "img/02h.png" %}';
-                {% elif "03:00" <= hora_atual and hora_atual <= "03:59" %}
-                    novaImagem = '{% static "img/03h.png" %}';
-                {% elif "04:00" <= hora_atual and hora_atual <= "04:59" %}
-                    novaImagem = '{% static "img/04h.png" %}';
-                {% elif "05:00" <= hora_atual and hora_atual <= "05:59" %}
-                    novaImagem = '{% static "img/05h.png" %}';
-                {% elif "06:00" <= hora_atual and hora_atual <= "06:59" %}
-                    novaImagem = '{% static "img/06h.png" %}';
-                {% elif "07:00" <= hora_atual and hora_atual <= "07:59" %}
-                    novaImagem = '{% static "img/07h.png" %}';
-                {% elif "08:00" <= hora_atual and hora_atual <= "09:30" %}
-                    novaImagem = '{% static "img/08h.png" %}';
-                {% elif "09:31" <= hora_atual and hora_atual <= "09:59" %}
-                    novaImagem = '{% static "img/09h.png" %}';
-                {% elif "10:00" <= hora_atual and hora_atual <= "11:29" %}
-                    novaImagem = '{% static "img/10h.png" %}';
-                {% elif "11:30" <= hora_atual and hora_atual <= "11:59" %}
-                    novaImagem = '{% static "img/11h.png" %}';
-                {% elif "12:00" <= hora_atual and hora_atual <= "12:59" %}
-                    novaImagem = '{% static "img/12h.png" %}';
-                {% elif "13:00" <= hora_atual and hora_atual <= "13:29" %}
-                    novaImagem = '{% static "img/13h.png" %}';
-                {% elif "13:30" <= hora_atual and hora_atual <= "16:59" %}
-                    novaImagem = '{% static "img/14h.png" %}';
-                {% elif "17:00" <= hora_atual and hora_atual <= "17:59" %}
-                    novaImagem = '{% static "img/17h.png" %}';
-                {% elif "18:00" <= hora_atual and hora_atual <= "19:59" %}
-                    novaImagem = '{% static "img/18h.png" %}';
-                {% elif "20:00" <= hora_atual and hora_atual <= "20:59" %}
-                    novaImagem = '{% static "img/20h.png" %}';
-                {% elif "21:00" <= hora_atual and hora_atual <= "21:59" %}
-                    novaImagem = '{% static "img/21h.png" %}';
-                {% elif "22:00" <= hora_atual and hora_atual <= "00:59" %}
-                    novaImagem = '{% static "img/23h.png" %}';
-                {% endif %}
-            </script>
-
             <div class="ponteiro-horas" id="ponteiroHoras"></div>
             <div class="ponteiro-minutos" id="ponteiroMinutos"></div>
             <div class="ponteiro-segundos" id="ponteiroSegundos"></div>
@@ -135,14 +91,56 @@
     <script>
         function atualizarRelogio() {
             const agora = new Date();
-
             const horas = agora.getHours();
             const minutos = agora.getMinutes();
             const segundos = agora.getSeconds();
-
             const grausHoras = (horas % 24) * 15 + (minutos / 60) * 15;
             const grausMinutos = minutos * 6 + (segundos / 60) * 6;
             const grausSegundos = segundos * 6;
+
+            var novaImagem = '{% static "img/21h.png" %}';  // Padrão
+
+            var horaAtual = horas + ":" + (minutos < 10 ? "0" : "") + minutos;
+
+            if ("01:00" <= horaAtual && horaAtual <= "01:59") {
+                novaImagem = '{% static "img/01h.png" %}';
+            } else if ("02:00" <= horaAtual && horaAtual <= "02:59") {
+                novaImagem = '{% static "img/02h.png" %}';
+            } else if ("03:00" <= horaAtual && horaAtual <= "03:59") {
+                novaImagem = '{% static "img/03h.png" %}';
+            } else if ("04:00" <= horaAtual && horaAtual <= "04:59") {
+                novaImagem = '{% static "img/04h.png" %}';
+            } else if ("05:00" <= horaAtual && horaAtual <= "05:59") {
+                novaImagem = '{% static "img/05h.png" %}';
+            } else if ("06:00" <= horaAtual && horaAtual <= "06:59") {
+                novaImagem = '{% static "img/06h.png" %}';
+            } else if ("07:00" <= horaAtual && horaAtual <= "07:59") {
+                novaImagem = '{% static "img/07h.png" %}';
+            } else if ("08:00" <= horaAtual && horaAtual <= "09:30") {
+                novaImagem = '{% static "img/08h.png" %}';
+            } else if ("09:31" <= horaAtual && horaAtual <= "09:59") {
+                novaImagem = '{% static "img/09h.png" %}';
+            } else if ("10:00" <= horaAtual && horaAtual <= "11:29") {
+                novaImagem = '{% static "img/10h.png" %}';
+            } else if ("11:30" <= horaAtual && horaAtual <= "11:59") {
+                novaImagem = '{% static "img/11h.png" %}';
+            } else if ("12:00" <= horaAtual && horaAtual <= "12:59") {
+                novaImagem = '{% static "img/12h.png" %}';
+            } else if ("13:00" <= horaAtual && horaAtual <= "13:29") {
+                novaImagem = '{% static "img/13h.png" %}';
+            } else if ("13:30" <= horaAtual && horaAtual <= "16:59") {
+                novaImagem = '{% static "img/14h.png" %}';
+            } else if ("17:00" <= horaAtual && horaAtual <= "17:59") {
+                novaImagem = '{% static "img/17h.png" %}';
+            } else if ("18:00" <= horaAtual && horaAtual <= "19:59") {
+                novaImagem = '{% static "img/18h.png" %}';
+            } else if ("20:00" <= horaAtual && horaAtual <= "20:59") {
+                novaImagem = '{% static "img/20h.png" %}';
+            } else if ("21:00" <= horaAtual && horaAtual <= "21:59") {
+                novaImagem = '{% static "img/21h.png" %}';
+            } else if ("22:00" <= horaAtual && horaAtual <= "00:59") {
+                novaImagem = '{% static "img/23h.png" %}';
+            }
 
             document.getElementById('ponteiroHoras').style.transform = `rotate(${grausHoras}deg)`;
             document.getElementById('ponteiroMinutos').style.transform = `rotate(${grausMinutos}deg)`;
@@ -153,8 +151,7 @@
         }
 
         setInterval(atualizarRelogio, 1000);
-
-        atualizarRelogio();      
+        atualizarRelogio();
         window.onload = atualizarRelogio;
     </script>
 </body>
