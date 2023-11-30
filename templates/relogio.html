@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>INDEX</title>
     <style>
-        .card {
+        {% comment %} .card {
             background: linear-gradient(to top, #878787, #262626);
             border-radius: 15px;
             width: 480px;
@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
+        } {% endcomment %}
 
         .relogio {
             width: 450px;
@@ -55,12 +55,24 @@
         }
 
         .ponteiro-horas {
-            width: 6px;
-            height: 190px;
-            margin-top: -190px;
-            transform: rotate(90deg);
+            width: 3px;
+            height: 110px;
+            margin-top: -110px; /* Ajuste para posicionar o ponteiro corretamente */
+            transform: rotate(90deg); /* Ajuste de orientação */
+            /* background-image: url("{% static 'img/Ponteiro.png' %}");
+            background-size: cover;
+            background-position: center; */
         }
-
+        .ponteiro-minutos {
+            width: 3px;
+            height: 180px;
+            margin-top: -180px; 
+        }
+        .ponteiro-segundos {
+            width: 2px;
+            height: 195px;
+            margin-top: -195px; 
+        } 
         h2 {
             font-family: Arial, sans-serif;
         }
@@ -98,48 +110,48 @@
             const grausMinutos = minutos * 6 + (segundos / 60) * 6;
             const grausSegundos = segundos * 6;
 
-            var novaImagem = '{% static "img/21h.png" %}';  // Padrão
+            var imagemRelogio = '{% static "img/21h.png" %}';  // Padrão
 
             var horaAtual = horas + ":" + (minutos < 10 ? "0" : "") + minutos;
 
             if ("01:00" <= horaAtual && horaAtual <= "01:59") {
-                novaImagem = '{% static "img/01h.png" %}';
+                imagemRelogio = '{% static "img/01h.png" %}';
             } else if ("02:00" <= horaAtual && horaAtual <= "02:59") {
-                novaImagem = '{% static "img/02h.png" %}';
+                imagemRelogio = '{% static "img/02h.png" %}';
             } else if ("03:00" <= horaAtual && horaAtual <= "03:59") {
-                novaImagem = '{% static "img/03h.png" %}';
+                imagemRelogio = '{% static "img/03h.png" %}';
             } else if ("04:00" <= horaAtual && horaAtual <= "04:59") {
-                novaImagem = '{% static "img/04h.png" %}';
+                imagemRelogio = '{% static "img/04h.png" %}';
             } else if ("05:00" <= horaAtual && horaAtual <= "05:59") {
-                novaImagem = '{% static "img/05h.png" %}';
+                imagemRelogio = '{% static "img/05h.png" %}';
             } else if ("06:00" <= horaAtual && horaAtual <= "06:59") {
-                novaImagem = '{% static "img/06h.png" %}';
+                imagemRelogio = '{% static "img/06h.png" %}';
             } else if ("07:00" <= horaAtual && horaAtual <= "07:59") {
-                novaImagem = '{% static "img/07h.png" %}';
+                imagemRelogio = '{% static "img/07h.png" %}';
             } else if ("08:00" <= horaAtual && horaAtual <= "09:30") {
-                novaImagem = '{% static "img/08h.png" %}';
+                imagemRelogio = '{% static "img/08h.png" %}';
             } else if ("09:31" <= horaAtual && horaAtual <= "09:59") {
-                novaImagem = '{% static "img/09h.png" %}';
+                imagemRelogio = '{% static "img/09h.png" %}';
             } else if ("10:00" <= horaAtual && horaAtual <= "11:29") {
-                novaImagem = '{% static "img/10h.png" %}';
+                imagemRelogio = '{% static "img/10h.png" %}';
             } else if ("11:30" <= horaAtual && horaAtual <= "11:59") {
-                novaImagem = '{% static "img/11h.png" %}';
+                imagemRelogio = '{% static "img/11h.png" %}';
             } else if ("12:00" <= horaAtual && horaAtual <= "12:59") {
-                novaImagem = '{% static "img/12h.png" %}';
+                imagemRelogio = '{% static "img/12h.png" %}';
             } else if ("13:00" <= horaAtual && horaAtual <= "13:29") {
-                novaImagem = '{% static "img/13h.png" %}';
+                imagemRelogio = '{% static "img/13h.png" %}';
             } else if ("13:30" <= horaAtual && horaAtual <= "16:59") {
-                novaImagem = '{% static "img/14h.png" %}';
+                imagemRelogio = '{% static "img/14h.png" %}';
             } else if ("17:00" <= horaAtual && horaAtual <= "17:59") {
-                novaImagem = '{% static "img/17h.png" %}';
+                imagemRelogio = '{% static "img/17h.png" %}';
             } else if ("18:00" <= horaAtual && horaAtual <= "19:59") {
-                novaImagem = '{% static "img/18h.png" %}';
+                imagemRelogio = '{% static "img/18h.png" %}';
             } else if ("20:00" <= horaAtual && horaAtual <= "20:59") {
-                novaImagem = '{% static "img/20h.png" %}';
+                imagemRelogio = '{% static "img/20h.png" %}';
             } else if ("21:00" <= horaAtual && horaAtual <= "21:59") {
-                novaImagem = '{% static "img/21h.png" %}';
+                imagemRelogio = '{% static "img/21h.png" %}';
             } else if ("22:00" <= horaAtual && horaAtual <= "00:59") {
-                novaImagem = '{% static "img/23h.png" %}';
+                imagemRelogio = '{% static "img/23h.png" %}';
             }
 
             document.getElementById('ponteiroHoras').style.transform = `rotate(${grausHoras}deg)`;
@@ -147,7 +159,7 @@
             document.getElementById('ponteiroSegundos').style.transform = `rotate(${grausSegundos}deg)`;
 
             // Atualiza a imagem de fundo
-            $(".relogio").css("background-image", "url(" + novaImagem + ")");
+            $(".relogio").css("background-image", "url(" + imagemRelogio + ")");
         }
 
         setInterval(atualizarRelogio, 1000);
